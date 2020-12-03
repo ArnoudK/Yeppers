@@ -11,19 +11,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StoryScene.unity
     guid: ab425d3520147624f8b4e4083945e9e4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Jungle.unity
     guid: 07e9aedf4ab887642a6187ef82e60f48
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Left.unity
     guid: cc820ef65923029418e8cc0284f2c979
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Right.unity
     guid: 0a708676cc7cad44cbb5732c8c8f3572
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cliff.unity
     guid: b25a3843133ea8b429bd048888875429
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Fork.unity
     guid: fd26c528878e85b48a6039acfdcc8b88
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 91cf1a76336c37446b38689fca600f41
+  - enabled: 1
+    path: Assets/Scenes/GameWon.unity
+    guid: f39dc98b79eb52542a002a5044a24229
   m_configObjects: {}

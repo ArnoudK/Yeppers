@@ -12,6 +12,20 @@ public class StoryObjectLoadScene : StoryObjectManager.StoryObject
 
     private bool activated = false;
 
+
+
+
+
+    public override void AddedToList()
+    {
+        if (playOnAddedToList)
+        {
+            GameManager.Instance.LoadSceneDelayed(sceneToLoad, sceneLoadDelay);
+
+        }
+        base.AddedToList();
+    }
+
     public override void TriggerAction()
     {
         if (!activated)

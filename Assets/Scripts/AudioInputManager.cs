@@ -12,6 +12,9 @@ public class AudioInputManager : MonoBehaviour
     private MicInput mi;
     public static AudioInputManager Instance { private set; get; }
 
+    public string lastResult { private set; get; }
+
+
     void Awake()
     {
         if (Instance == null)
@@ -31,13 +34,13 @@ public class AudioInputManager : MonoBehaviour
     public event EventHandler<string> OnSpeechResult;
     public event EventHandler<string> OnSpeechHypothesis;
 
-#if UNITY_EDITOR
 
     public void InvokeOnSPeechResult(string e)
     {
+        lastResult = e;
         OnSpeechResult?.Invoke(this, e);
     }
-#endif
+
     private void Start()
     {
 
@@ -50,7 +53,7 @@ public class AudioInputManager : MonoBehaviour
         m_DictationRecognizer = new DictationRecognizer();
         m_DictationRecognizer.DictationResult += (text, confidence) =>
         {
-
+            lastResult = text;
             OnSpeechResult?.Invoke(this, text);
         };
 
@@ -74,7 +77,7 @@ public class AudioInputManager : MonoBehaviour
         m_DictationRecognizer.Start();
     }
 
-    private bool keepActive;
+    private bool keepActive = true;
     float lastDicStart;
     //keep it active
     private void FixedUpdate()

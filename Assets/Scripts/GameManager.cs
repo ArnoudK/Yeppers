@@ -14,11 +14,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
+
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
-            inventory = new List<InventoryItem>();
         }
         else
         {
@@ -57,45 +58,9 @@ public class GameManager : MonoBehaviour
     {
         MainMenu = 0,
         StartStory = 1,
-        Jungle = 2,
-        Left = 3,
-        Right = 4,
-        Cliff = 5,
-        Fork = 6
-
+        GameOver = 3,
+        GameWon = 4
     }
 
-
-    List<InventoryItem> inventory;
-
-    public enum InventoryItem
-    {
-        invalid = -1,
-        stick,
-        chicken
-    }
-
-    public bool HasInventoryItem(InventoryItem ii)
-    {
-        return inventory.Contains(ii);
-
-    }
-
-    public bool HasInventoryItem(string s)
-    {
-        InventoryItem ii = (InventoryItem)Enum.Parse(typeof(InventoryItem), s);
-        return inventory.Contains(ii);
-    }
-
-
-    public void AddInventoryItem(InventoryItem ii)
-    {
-        inventory.Add(ii);
-    }
-
-    public void RemoveInventoryItem(InventoryItem ii)
-    {
-        _ = inventory.Remove(ii);
-    }
 
 }

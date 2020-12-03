@@ -5,9 +5,34 @@ using UnityEngine;
 public class StoryObjectManager : MonoBehaviour
 {
 
-    [SerializeField]
-    public StoryObject[] storyObjects;
+    public static StoryObjectManager Instance { get; private set; }
 
+    public List<StoryObject> activeStoryObjects = new List<StoryObject>();
+
+
+
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogError("Can only be 1 storyobject managager in the scene");
+        }
+    }
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+
+    public void AddStoryObject(StoryObject storyObject)
+    {
+        activeStoryObjects.Add(storyObject);
+        storyObject.AddedToList();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -15,14 +40,17 @@ public class StoryObjectManager : MonoBehaviour
         AudioInputManager.Instance.OnSpeechResult += Instance_OnSpeechResult;
     }
 
+
+
     private void Instance_OnSpeechResult(object sender, string e)
     {
-        foreach (StoryObject so in storyObjects)
+        foreach (StoryObject so in activeStoryObjects)
         {
             foreach (string triggerKeyWord in so.triggerKeyWords)
                 if (e.Contains(triggerKeyWord))
                 {
                     so.Triggered();
+                    return;
                 }
         }
 
@@ -33,6 +61,7 @@ public class StoryObjectManager : MonoBehaviour
     public abstract class StoryObject : MonoBehaviour
     {
 
+        public bool playOnAddedToList = false;
         [SerializeField]
         AudioSource playSound;
         [SerializeField]
@@ -42,12 +71,26 @@ public class StoryObjectManager : MonoBehaviour
 
         public void Triggered()
         {
-            if (playSound != null)
+            if (playSound != null && !playOnAddedToList)
             {
-                playSound.PlayDelayed(delay);
+                PlaySound();
             }
             TriggerAction();
 
+
+        }
+
+        public virtual void AddedToList()
+        {
+            if (playOnAddedToList)
+            {
+                PlaySound();
+            }
+        }
+
+        private void PlaySound()
+        {
+            playSound.PlayDelayed(delay);
 
         }
 
