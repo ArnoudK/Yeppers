@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 public class StartGameScript : MonoBehaviour
 {
 
@@ -11,14 +8,12 @@ public class StartGameScript : MonoBehaviour
     [SerializeField]
     string storySceneName;
 
-    [SerializeField]
-    AudioSource audioSourceStart;
+  
 
     // Start is called before the first frame update
     void Start()
     {
-        audioSourceStart.PlayDelayed(0.5f);
-
+      
         AudioInputManager.Instance.OnSpeechResult += Instance_OnSpeechResult;
     }
 

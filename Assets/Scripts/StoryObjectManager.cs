@@ -90,6 +90,11 @@ public class StoryObjectManager : MonoBehaviour
 
         private void PlaySound()
         {
+            if (!GameManager.Instance.EnableMicDuringAudio)
+            {
+                Debug.Log("Disabling mic for:" + playSound.clip.length);
+                AudioInputManager.Instance.DisableMicForSeconds(playSound.clip.length);
+            }
             playSound.PlayDelayed(delay);
 
         }

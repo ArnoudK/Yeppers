@@ -32,10 +32,17 @@ public class OpenSettings : MonoBehaviour
         playFXeffect.Play();
     }
 
+
     public void SetMusicVolume(float music)
     {
         am.SetFloat("MusicVolumeExp", music);
     }
+    public void SetInputDuringAudio(bool val)
+    {
+        GameManager.Instance.EnableMicDuringAudio = val;
+    }
+
+
 
 }
 

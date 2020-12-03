@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
@@ -97,6 +98,17 @@ public class AudioInputManager : MonoBehaviour
         }
     }
 
+
+    public void DisableMicForSeconds(float time)
+    {
+        StopListening();
+        StartCoroutine(EnableMicDelayedCoroutine(time));
+    }
+    private IEnumerator EnableMicDelayedCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ForceStart();
+    }
 
 
     public void StopListening()
